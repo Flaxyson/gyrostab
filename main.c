@@ -21,6 +21,7 @@ int main(void){
                                             //Banana delicious?
                                             //Mmmmm vad gott <3<3
                                             //Yaaaasssss daddy
+                                            //Techno & ketamine?
           }
 
       }
