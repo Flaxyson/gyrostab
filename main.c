@@ -5,7 +5,6 @@
 #include "pid.h"
 #include "gyro.h"
 
-//alex test
 
 int main(void){
     int key;
