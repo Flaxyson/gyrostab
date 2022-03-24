@@ -18,10 +18,7 @@ int main(void){
       if (t5expq()) {                     // Manage periodic tasks
           l88row(colset());               // ...88LED and Keyboard
            if ((key=keyscan())>=0) {       // ...Any key pressed?
-                                            //Banana delicious?
-                                            //Mmmmm vad gott <3<3
-                                            //Yaaaasssss daddy
-                                            //Techno & ketamine?
+                                          
           }
 
       }
