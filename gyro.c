@@ -1,3 +1,0 @@
-#include "gyro.h"
-
-//funktioner

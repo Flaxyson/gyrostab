@@ -49,8 +49,8 @@ void T1powerUpInitPWM(uint16_t ch){
         timer_channel_output_shadow_config(TIMER1,TIMER_CH_2,TIMER_OC_SHADOW_DISABLE);
     }
    if (ch&0x8) {
-        timer_channel_output_pulse_value_config(TIMER1,TIMER_CH_0,11999);
-        timer_channel_output_mode_config(TIMER1,TIMER_CH_0,TIMER_OC_MODE_PWM0);
+        timer_channel_output_pulse_value_config(TIMER1,TIMER_CH_3,11999);
+        timer_channel_output_mode_config(TIMER1,TIMER_CH_3,TIMER_OC_MODE_PWM0);
         timer_channel_output_shadow_config(TIMER1,TIMER_CH_3,TIMER_OC_SHADOW_DISABLE);
     }
     
@@ -64,10 +64,11 @@ void T1setPWMch2(int value){
 
 void T1setPWMmotorB(int throttel){
     if (throttel>0) {
-       timer_channel_output_pulse_value_config(TIMER1,TIMER_CH_2,(throttel/100.0)*16000);
-       timer_channel_output_pulse_value_config(TIMER1,TIMER_CH_0,0);
+       timer_channel_output_pulse_value_config(TIMER1,TIMER_CH_0,(throttel/100.0)*16000);
+       timer_channel_output_pulse_value_config(TIMER1,TIMER_CH_3,0);
     } else {
-       timer_channel_output_pulse_value_config(TIMER1,TIMER_CH_2,0);
-       timer_channel_output_pulse_value_config(TIMER1,TIMER_CH_0,(-throttel/100.0)*16000);
+       timer_channel_output_pulse_value_config(TIMER1,TIMER_CH_0,0);
+       timer_channel_output_pulse_value_config(TIMER1,TIMER_CH_3,(-throttel/100.0)*16000);
     }
 }
+
