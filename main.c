@@ -1,20 +1,34 @@
 #include "gd32vf103.h"
-#include "drivers.h"
-#include "dac.h"
-#include "pwm.h"
+#include "delay.h"
+#include "pwd.h"
+#include "servo.h"
 
 
-//************Funktioner**************************************//
 
-//************MAIN*******************************************//
 
 int main(void){
-    
-    DAC0powerUpInit();                      // Initialize DAC0/PA4 toolbox
-    T1powerUpInitPWM(0x1);                  // Timer #1, Ch #2 PWM
-    
-    while (1) {
-      T1setPWMmotorB(-50);
-  }
-}
+    T1powerUpInitPWM();
+    USART0_init();                             // Initialize USART0 toolbox
+    initServoA();
 
+
+    while(1){
+      
+        T1setPWMmotorB(-60);
+        T1setPWMmotorA(-60);
+
+        moveServo(1000);
+        delay_1ms(1000);
+
+        moveServo(2048);
+        delay_1ms(1000);
+
+        moveServo(3000);
+        delay_1ms(1000);
+
+        moveServo(2048);
+        delay_1ms(1000);
+
+    }
+
+}
