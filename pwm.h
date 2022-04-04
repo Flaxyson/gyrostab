@@ -6,3 +6,7 @@ void T1setPWMch2(int value);
 void T1setPWMmotorB(int throttel);
 
 void T1setPWMmotorA(int throttel);
+
+void moveServo(int degrees);
+
+void initServoA(void);
