@@ -15,7 +15,7 @@ void T1powerUpInitPWM(void){
 
     timer_deinit(TIMER1);
     timer_struct_para_init(&timer_initpara);
-    timer_initpara.prescaler         = 107;
+    timer_initpara.prescaler         = 107; 
     timer_initpara.alignedmode       = TIMER_COUNTER_EDGE;
     timer_initpara.counterdirection  = TIMER_COUNTER_UP;
     timer_initpara.period            = 15999;
@@ -119,5 +119,5 @@ void initServoA(void){
 }
 
 void moveServo(int degrees){
-    timer_channel_output_pulse_value_config(TIMER0, TIMER_CH_0, degrees+1000);
+    timer_channel_output_pulse_value_config(TIMER0, TIMER_CH_0, degrees+2000);
 }

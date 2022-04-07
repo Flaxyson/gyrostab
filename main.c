@@ -8,9 +8,9 @@
 
 int main(void){
     T1powerUpInitPWM();
-    initServoA();
-    T1setPWMmotorA(0);
-    T1setPWMmotorB(0);
+    //initServoA();
+    //T1setPWMmotorA(0);
+    //T1setPWMmotorB(0);
     //T1setPWMmotorA(-100);
 
     mpu_vector_t vec, vec_temp;
@@ -25,14 +25,13 @@ int main(void){
        ICM-20600 is mostly register compatible with MPU6500, if MPU6500 is used only thing that needs 
        to change is MPU6500_WHO_AM_I_ID from 0x11 to 0x70. */
     mpu6500_install(I2C0);
-    T1setPWMmotorB(30);
+    T1setPWMmotorB(0);
 
 
     while(1){
         mpu6500_getAccel(&vec);
+        delay_1ms(50);
         moveServo((vec.x/4095)*2000);
-    
-
     }
 
 

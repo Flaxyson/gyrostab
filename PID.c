@@ -17,7 +17,7 @@ float PIDController_Update(PIDController *pid, float setpoint, float measurement
 	/*
 	* Error signal
 	*/
-    float error = setpoint - measurement;
+    float error = setpoint - measurement; //setpoint = börvärde, measurement = ärvärde
 
 	/*
 	* Proportional
