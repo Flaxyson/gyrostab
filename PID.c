@@ -2,6 +2,9 @@
 
 void PIDController_Init(PIDController *pid) {
 
+	pid->Kp = 3.50f;
+    pid->Kd = 40.0f;
+    pid->Ki = 0.10f;
 	/* Clear controller variables */
 	pid->integrator = 0.0f;
 	pid->prevError  = 0.0f;
@@ -27,7 +30,7 @@ float PIDController_Update(PIDController *pid, float setpoint, float measurement
 	/*
 	* Integral
 	*/
-    pid->integrator = pid->integrator += (pid->Ki * error);
+    pid->integrator += (pid->Ki * error);
 	
 	/* Anti-wind-up via integrator clamping */
     if (pid->integrator > pid->limMaxInt) {
