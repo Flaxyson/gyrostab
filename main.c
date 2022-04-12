@@ -4,7 +4,9 @@
 #include "pwm.h"
 #include "gd32v_mpu6500_if.h"
 #include "PID.h"
-#include "math.h"
+#include "aTan.h"
+
+#define PI 3.14159265
 
 int main(void){
     T1powerUpInitPWM();
@@ -13,7 +15,6 @@ int main(void){
     T1setPWMmotorB(0);
     
     float AngleX=0;
-
     mpu_vector_t vec;
 
     /* Initialize pins for I2C */
@@ -30,7 +31,7 @@ int main(void){
     while(1){
 
             mpu6500_getGyro(&vec);
-            AngleX = atan2(vec.x, vec.z)*180/3.142;
+            AngleX = atan2(vec.x, vec.z)*180/PI;
 
         //temp=temp/45;
         //moveServo(1000*PIDController_Update(&pid,0,vec.x));
