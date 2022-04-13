@@ -1,12 +1,12 @@
 #include "gd32vf103.h"
-void T1powerUpInitPWM(void);
+void InitPWM(void);
 
-void T1setPWMch2(int value);
+void SetMotorA(int value);
 
-void T1setPWMmotorB(int throttel);
+void SetMotorB(int value);
 
-void T1setPWMmotorA(int throttel);
+void MoveServoA(int degrees);
 
-void moveServo(int degrees);
+void MoveServoB(int degrees);
 
 void initServoA(void);

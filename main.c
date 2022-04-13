@@ -1,4 +1,3 @@
-#include "stdio.h"
 #include "gd32vf103.h"
 #include "delay.h"
 #include "pwm.h"
@@ -6,15 +5,10 @@
 #include "PID.h"
 #include "aTan.h"
 
-#define PI 3.14159265
 
 int main(void){
-    T1powerUpInitPWM();
-    initServoA();
-    //T1setPWMmotorA(0);
-    //T1setPWMmotorB(0);
+    InitPWM();
     
-    int AngleX=0;
     mpu_vector_t vecA, vecG;
 
     /* Initialize pins for I2C */
@@ -25,21 +19,12 @@ int main(void){
        ICM-20600 is mostly register compatible with MPU6500, if MPU6500 is used only thing that needs 
        to change is MPU6500_WHO_AM_I_ID from 0x11 to 0x70. */
     mpu6500_install(I2C0);
-
-    
-
+    SetMotorA(1000);
+    SetMotorB(1000);
     while(1){
-
         mpu6500_getAccel(&vecA);
-
-
-        moveServo(arctan(vecA.z , vecA.x));
-        //moveServo(-90);  //-90 grader
-        //moveServo(0);   // 0 grader
-        //moveServo(90);  //90 grader
-        //delay_1ms(20000);
-        //moveServo(0); //-1100 till +1100
-        
+        MoveServoA(arctan(vecA.z , vecA.x));
+        MoveServoB(arctan(vecA.z , -vecA.y));
     }
 }
 
