@@ -16,6 +16,8 @@ int arctan(int x, int y){
         y = -y;
     }else if(y < 0){
         sumAngle = -NINETY; /* -90 * 256 */
+        x = -x;
+        y = -y;
     }
     for (int i = 0; i < 15; i++){
         if(y>0){

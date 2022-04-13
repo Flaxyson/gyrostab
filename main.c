@@ -11,11 +11,11 @@
 int main(void){
     T1powerUpInitPWM();
     initServoA();
-    T1setPWMmotorA(0);
-    T1setPWMmotorB(0);
+    //T1setPWMmotorA(0);
+    //T1setPWMmotorB(0);
     
-    float AngleX=0;
-    mpu_vector_t vec;
+    int AngleX=0;
+    mpu_vector_t vecA, vecG;
 
     /* Initialize pins for I2C */
     rcu_periph_clock_enable(RCU_GPIOB);
@@ -30,13 +30,15 @@ int main(void){
 
     while(1){
 
-            mpu6500_getGyro(&vec);
-            AngleX = atan2(vec.x, vec.z)*180/PI;
+        mpu6500_getAccel(&vecA);
 
-        //temp=temp/45;
-        //moveServo(1000*PIDController_Update(&pid,0,vec.x));
-        //moveServo((vec.x)/(4096/1000));
-        moveServo((AngleX/90)*1100); //-1100 till +1100
+
+        moveServo(arctan(vecA.z , vecA.x));
+        //moveServo(-90);  //-90 grader
+        //moveServo(0);   // 0 grader
+        //moveServo(90);  //90 grader
+        //delay_1ms(20000);
+        //moveServo(0); //-1100 till +1100
         
     }
 }

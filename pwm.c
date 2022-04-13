@@ -119,5 +119,11 @@ void initServoA(void){
 }
 
 void moveServo(int degrees){
-    timer_channel_output_pulse_value_config(TIMER0, TIMER_CH_0, degrees+1700);
+    int move = ((10*degrees)>>8)+1450;
+    if(move<900){
+        move=900;
+    }else if(move>2350){
+        move=2350;
+    }
+    timer_channel_output_pulse_value_config(TIMER0, TIMER_CH_0, move);
 }
