@@ -10,3 +10,5 @@ void MoveServoA(int degrees);
 void MoveServoB(int degrees);
 
 void initServoA(void);
+
+void motorStartupSeq(int endThrottle);

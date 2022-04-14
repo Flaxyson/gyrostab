@@ -1,4 +1,5 @@
 #include "pwm.h"
+#include "delay.h"
 
 /****************************PWM-CODE************************************/
 
@@ -38,11 +39,11 @@ void InitPWM(void){
     timer_channel_output_config(TIMER1,TIMER_CH_2,&timer_ocinitpara);
 
     
-    timer_channel_output_pulse_value_config(TIMER1,TIMER_CH_0,1000);
+    timer_channel_output_pulse_value_config(TIMER1,TIMER_CH_0,0);
     timer_channel_output_mode_config(TIMER1,TIMER_CH_0,TIMER_OC_MODE_PWM0);
     timer_channel_output_shadow_config(TIMER1,TIMER_CH_0,TIMER_OC_SHADOW_DISABLE);
 
-    timer_channel_output_pulse_value_config(TIMER1,TIMER_CH_1,1000);
+    timer_channel_output_pulse_value_config(TIMER1,TIMER_CH_1,0);
     timer_channel_output_mode_config(TIMER1,TIMER_CH_1,TIMER_OC_MODE_PWM0);
     timer_channel_output_shadow_config(TIMER1,TIMER_CH_1,TIMER_OC_SHADOW_DISABLE);
 
@@ -53,7 +54,7 @@ void InitPWM(void){
     timer_auto_reload_shadow_enable(TIMER1);
     timer_enable(TIMER1);
 
-    initServoA();
+    
 }
 
 void SetMotorA(int value){
@@ -62,6 +63,17 @@ void SetMotorA(int value){
 
 void SetMotorB(int value){
     timer_channel_output_pulse_value_config(TIMER1,TIMER_CH_1,value);
+}
+
+void motorStartupSeq(int endThrottle){
+    SetMotorA(2000);
+    SetMotorB(2000);
+    delay_1ms(2000);
+    SetMotorA(1000);
+    SetMotorB(1000);
+    delay_1ms(2000);
+    SetMotorA(endThrottle);
+    SetMotorB(endThrottle);
 }
 
 
@@ -103,8 +115,8 @@ void initServoA(void){
 
 void MoveServoA(int degrees){
     int move = ((10*degrees)>>8)+1450;
-    if(move<900){
-        move=900;
+    if(move<550){
+        move=550;
     }else if(move>2350){
         move=2350;
     }
@@ -114,8 +126,8 @@ void MoveServoA(int degrees){
 void MoveServoB(int degree){
     int move = ((10*degree)>>8)+1450;
     //move = 2350 - move;
-    if(move<900){
-        move=900;
+    if(move<550){
+        move=550;
     }else if(move>2350){
         move=2350;
     }

@@ -1,4 +1,4 @@
-/* Copyright (c) 2022 Max Gulda
+/* Copyright (c) 2022 Max Gulda, KTH
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -23,7 +23,15 @@ SOFTWARE. */
 #define NINETY 23040
 #define HUNDREDEIGHTY 46080
 
-int arctan(int x, int y){
+/**
+ * @brief input nearby (x) and opposite (y), returns arctan bitshifted <<8
+ * 
+ * @param x 
+ * @param y 
+ * @return int 
+ */
+
+int arctan(int32_t x, int32_t y){
 
     /* AngTable = 45, 26.565, 14.036, 7.125, 3.576, 1.790, 0.895, 0.448 ... etc */
 
@@ -55,4 +63,22 @@ int arctan(int x, int y){
         y = newY;
     }
     return sumAngle;
+}
+
+/**
+ * @brief Returns squareroot bitshifted << 5
+ * 
+ * @param n 
+ * @return int32_t 
+ */
+int32_t ssqrt(int32_t n){
+    int64_t val = n << 10;
+    unsigned long temp, g=0, b = 0x8000, bshft = 15;
+    do {
+        if (val >= (temp = (((g << 1) + b)<<bshft--))) {
+           g += b;
+           val -= temp;
+        }
+    } while (b >>= 1);
+    return g;
 }
