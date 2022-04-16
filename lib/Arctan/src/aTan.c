@@ -23,13 +23,7 @@ SOFTWARE. */
 #define NINETY 23040
 #define HUNDREDEIGHTY 46080
 
-/**
- * @brief input nearby (x) and opposite (y), returns arctan bitshifted <<8
- * 
- * @param x 
- * @param y 
- * @return int 
- */
+
 
 int arctan(int32_t x, int32_t y){
 
@@ -65,12 +59,7 @@ int arctan(int32_t x, int32_t y){
     return sumAngle;
 }
 
-/**
- * @brief Returns squareroot bitshifted << 5
- * 
- * @param n 
- * @return int32_t 
- */
+
 int32_t ssqrt(int32_t n){
     int64_t val = n << 10;
     unsigned long temp, g=0, b = 0x8000, bshft = 15;
@@ -80,5 +69,5 @@ int32_t ssqrt(int32_t n){
            val -= temp;
         }
     } while (b >>= 1);
-    return g;
+    return (g<<3);
 }

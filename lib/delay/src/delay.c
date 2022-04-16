@@ -30,6 +30,12 @@ void delay_1ms(uint32_t count)
 	}while(delta_mtime <(SystemCoreClock/4000.0 *count ));
 }
 
+
+int millis(void){
+	uint64_t mtime = get_timer_value();
+	return ((mtime*4000.0)/SystemCoreClock);
+}
+
 void delay_1us(uint32_t count)
 {
 	uint64_t start_mtime, delta_mtime;

@@ -17,6 +17,13 @@ void delay_1ms(uint32_t count);
 
 /** 
  * Delay one millisecond * count
- * @param count miliseconds to delay for
+ * @param count pikoseconds to delay for
 */
 void delay_1us(uint32_t count);
+
+/**
+ * @brief gets the system clock in milliseconds
+ * 
+ * @return int 
+ */
+int millis(void);

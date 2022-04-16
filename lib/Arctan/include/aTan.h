@@ -20,6 +20,20 @@ SOFTWARE. */
 
 #include "gd32vf103.h"
 
+/**
+ * @brief Fast aTan2 fixedpoint cordic
+ * input adjacent (x) and opposite (y), returns arctan bitshifted <<8
+ * 
+ * @param x = adjacent
+ * @param y = opposite
+ * @return arctan(y/x) bitshifted 8 <<
+ */
 int arctan(int32_t x, int32_t y);
 
+
+/**
+ * @brief Fast squareroot 
+ * @param 32.bit int 
+ * @return squareroot of input bitshifted 8 << 
+ */
 int32_t ssqrt(int32_t n);
