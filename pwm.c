@@ -53,8 +53,6 @@ void InitPWM(void){
 
     timer_auto_reload_shadow_enable(TIMER1);
     timer_enable(TIMER1);
-
-    
 }
 
 void SetMotorA(int value){
@@ -113,8 +111,8 @@ void initServoA(void){
     timer_enable(TIMER0);
 }
 
-void MoveServoA(int degrees){
-    int move = ((10*degrees)>>8)+1450;
+void MoveServoA(int degree){ 
+    int move = ((10*degree)>>8)+1450;
     if(move<550){
         move=550;
     }else if(move>2350){
