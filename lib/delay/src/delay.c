@@ -1,20 +1,6 @@
-/*!
-    \file  systick.c
-    \brief the systick configuration file
-    \version 2019-6-5, V1.0.0, firmware for GD32VF103
-*/
-
-
-
 #include "gd32vf103.h"
 #include "delay.h"
 
-/*!
-    \brief      delay a time in milliseconds
-    \param[in]  count: count in milliseconds
-    \param[out] none
-    \retval     none
-*/
 void delay_1ms(uint32_t count)
 {
 	uint64_t start_mtime, delta_mtime;

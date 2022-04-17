@@ -24,6 +24,6 @@ void delay_1us(uint32_t count);
 /**
  * @brief gets the system clock in milliseconds
  * 
- * @return int 
+ * @return int, milliseconds
  */
 int millis(void);

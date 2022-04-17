@@ -43,9 +43,9 @@ int mpu6500_getGyro(mpu_vector_t* pGyro);
 
 /** 
  * Get Both gyro and accelleration data
- * @param pAccel buffer to store accelleration data in
  * @param pGyro buffer to store rotation data in
+ * @param pAccel buffer to store accelleration data in
 */
-int mpu6500_getGyroAccel(mpu_vector_t* pAccel, mpu_vector_t* pGyro);
+int mpu6500_getGyroAccel(mpu_vector_t* pGyro, mpu_vector_t* pAccel);
 
 #endif

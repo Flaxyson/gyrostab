@@ -10,7 +10,7 @@ int main(void){
     InitPWM();
     initServoA();
     int prev_time=0,current_time=0, delta_Time=0;
-    int32_t gyroX,gyroY,accX,accY,angleX=0,angleY=0;
+    int32_t gyroX,gyroY,accX,accY,roll=0,pitch=0;
     mpu_vector_t vecA, vecG;
 
     /* Initialize pins for I2C */
@@ -38,12 +38,12 @@ int main(void){
         gyroX = -(delta_Time * (int)vecG.y << 16)/(4194*1000);   // Turns into fixed point 8 <<
         gyroY = -(delta_Time * (int)vecG.x << 16)/(4194*1000);
 
-        //Försök på complementary Filter
-        angleX = ((0.95*(gyroX+angleX)) + (0.05*accX));
-        angleY = ((0.95*(gyroY+angleY)) + (0.05*accY));  
+        //Complementary Filter
+        roll = ((0.97*(gyroX+roll)) + (0.03*accX));
+        pitch = ((0.97*(gyroY+pitch)) + (0.03*accY));  
 
-        MoveServoA(angleX);
-        MoveServoB(angleY);
+        MoveServoA(roll);
+        MoveServoB(pitch);
     }
 }
 
