@@ -147,14 +147,14 @@ int cordic_asin(int yInput){
     return sumAngle;
 }
 
-int cordic_acin(int xInput){
-    int x = 156;
-    int y = 0;
-    int sumAngle = 0;
+int cordic_acos(int xInput){
+    int x = 0;
+    int y = 156;
+    int sumAngle = 90*256;
     int newX=x, newY=y;
 
     for(int i = 0; i < 15; i++){
-        if(x < xInput){
+        if(x > xInput){
             /* Rotate counter clockwise */
             newX -= (y>>i);
             newY += (x>>i);
