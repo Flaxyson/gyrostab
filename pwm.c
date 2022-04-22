@@ -123,7 +123,6 @@ void MoveServoA(int degree){
 
 void MoveServoB(int degree){
     int move = ((10*degree)>>8)+1450;
-    //move = 2350 - move;
     if(move<550){
         move=550;
     }else if(move>2350){

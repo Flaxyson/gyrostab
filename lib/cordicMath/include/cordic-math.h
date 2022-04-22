@@ -28,12 +28,37 @@ SOFTWARE. */
  * @param y = opposite
  * @return arctan(y/x) bitshifted 8 <<
  */
-int arctan(int32_t x, int32_t y);
+int cordic_atan(int32_t y, int32_t x);
+
+/**
+ * @brief Fast cos
+ * 
+ * @param theta degrees << 8
+ * @return int, fixed point cos value 
+ */
+int cordic_cos(int theta);
 
 
 /**
- * @brief Fast squareroot 
- * @param 32.bit int 
- * @return squareroot of input bitshifted 8 << 
+ * @brief Fast cos
+ * 
+ * @param theta degrees << 8
+ * @return int, fixed point sin value 
  */
-int32_t ssqrt(int32_t n);
+int cordic_sin(int x);
+
+/**
+ * @brief Fast arcsin
+ * 
+ * @param xInput value between -256 and 256
+ * @return int bitshifted 8 left
+ */
+int cordic_asin(int xInput);
+
+/**
+ * @brief Fast arccos
+ * 
+ * @param xInput value between -256 and 256
+ * @return int bitshifted 8 left
+ */
+int cordic_acos(int xInput);
