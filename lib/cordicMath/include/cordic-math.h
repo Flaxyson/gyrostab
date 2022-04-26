@@ -20,15 +20,19 @@ SOFTWARE. */
 
 #include "gd32vf103.h"
 
+#define M_PI 804
+#define M_E 695
+
+
 /**
  * @brief Fast aTan2 fixedpoint cordic
  * input adjacent (x) and opposite (y), returns arctan bitshifted <<8
  * 
  * @param x = adjacent
  * @param y = opposite
- * @return arctan(y/x) bitshifted 8 <<
+ * @return arctan(y/x) bitshifted << 8
  */
-int cordic_atan(int32_t y, int32_t x);
+int32_t cordic_atan(int32_t y, int32_t x);
 
 /**
  * @brief Fast cos
@@ -36,7 +40,7 @@ int cordic_atan(int32_t y, int32_t x);
  * @param theta degrees << 8
  * @return int, fixed point cos value 
  */
-int cordic_cos(int theta);
+int32_t cordic_cos(int32_t theta);
 
 
 /**
@@ -45,20 +49,48 @@ int cordic_cos(int theta);
  * @param theta degrees << 8
  * @return int, fixed point sin value 
  */
-int cordic_sin(int x);
+int32_t cordic_sin(int32_t x);
 
 /**
- * @brief Fast arcsin
+ * @brief Fast arcsin there's a blindspot near asin(1) and asin(-1)
  * 
  * @param xInput value between -256 and 256
  * @return int bitshifted 8 left
  */
-int cordic_asin(int xInput);
+int32_t cordic_asin(int32_t xInput);
 
 /**
- * @brief Fast arccos
+ * @brief Fast arccos there's a blindspot near acos(1) and acos(-1)
  * 
  * @param xInput value between -256 and 256
  * @return int bitshifted 8 left
  */
-int cordic_acos(int xInput);
+int32_t cordic_acos(int32_t xInput);
+
+/**
+ * @brief fast cordic tan calculation
+ * 
+ * @param degree value in degrees * 256
+ * @return value of tan(degree) * 256 
+ */
+int32_t cordic_tan(int32_t degree);
+
+/**
+ * @brief 
+ * 
+ * @param value you want to sqrt << 8
+ * @return sqrt of value << 8
+ */
+int32_t ssqrt(int32_t n);
+
+int power(int x, int y);
+
+int absolute(int input);
+
+int isEven(int input);
+
+int isOdd(int input);
+
+int to_degree(int input);
+
+int to_radians(int input);

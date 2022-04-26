@@ -23,7 +23,7 @@ SOFTWARE. */
 /* AngTable = 45, 26.565, 14.036, 7.125, 3.576, 1.790, 0.895, 0.448, 0.225, 0.112, 0.056, 0.028, 0.014, 0.007,  0.003 */
 int LUT_CORDIC_ATAN[15] = {11520, 6801, 3593, 1824, 916, 458, 229, 115, 57, 28, 14, 7, 4, 2, 1}; /* Degree << 8 */
 
-int cordic_atan(int32_t y, int32_t x){
+int32_t cordic_atan(int32_t y, int32_t x){
     int sumAngle = 0;
     int newX=x, newY=y;
     if(x<0 && y>0){              
@@ -53,8 +53,7 @@ int cordic_atan(int32_t y, int32_t x){
     return sumAngle;
 }
 
-
-int cordic_cos(int theta){
+int32_t cordic_cos(int32_t theta){
     int x = 156;
     int y = 0;
     int sumAngle = 0;
@@ -88,7 +87,7 @@ int cordic_cos(int theta){
     return x;
 }
 
-int cordic_sin(int theta){
+int32_t cordic_sin(int32_t theta){
     int x = 156;
     int y = 0;
     int sumAngle = 0;
@@ -122,7 +121,7 @@ int cordic_sin(int theta){
     return y;
 }
 
-int cordic_asin(int yInput){
+int32_t cordic_asin(int32_t yInput){
     int x = 156;
     int y = 0;
     int sumAngle = 0;
@@ -147,7 +146,7 @@ int cordic_asin(int yInput){
     return sumAngle;
 }
 
-int cordic_acos(int xInput){
+int32_t cordic_acos(int32_t xInput){
     int x = 0;
     int y = 156;
     int sumAngle = 90*256;
@@ -172,16 +171,67 @@ int cordic_acos(int xInput){
     return sumAngle;
 }
 
-int cordic_sqrt(int x){
-int base, i, y;
-       base = 128;
-       y = 0;
-       for (i = 1; i <= 8; i++){
-               y +=  base;
-               if  ( (y * y) > x ){
-                       y -= base;  // base should not have been added, substract again
-               }
-               base >> 1;      // shift 1 digit to the right
-        }
-        return y;
+int32_t cordic_tan(int32_t degree){
+    return (cordic_sin(degree)/cordic_cos(degree));
 }
+
+int32_t ssqrt(int32_t n){
+    n = n<<2;
+    int64_t val = n << 10;
+    unsigned long temp, g=0, b = 0x8000, bshft = 15;
+    do {
+        if (val >= (temp = (((g << 1) + b)<<bshft--))) {
+           g += b;
+           val -= temp;
+        }
+    } while (b >>= 1);
+    return g>>2;
+}
+
+int power(int x, int y){
+
+    if(y==0){
+        return 256;
+    }
+    if(x==0){
+        return 0;
+    }
+    if(/*y>0*/1){
+        return (x * power(x,y-256))/256;
+    }/* else{ //Funkar inte än
+        return ((x * power(x,y+256))/256)*(1/256); 
+    } */
+}
+
+int absolute(int input){
+    if(input>0){
+        return input;
+    }else{
+        return -input;
+    }
+}
+
+int isEven(int input){
+    if(input%2) return 0;
+    return 1;
+}
+
+int isOdd(int input){
+    if(input%2) return 1;
+    return 0;
+}
+
+int to_degree(int input){
+    return (input*14667>>8);
+}
+
+int to_radians(int input){
+    return (input/14667)<<8;
+}
+
+
+/*E^*/
+/*log*/
+/*rad to degree*/
+/*degree to rad*/
+

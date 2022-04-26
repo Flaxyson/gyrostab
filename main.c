@@ -29,8 +29,9 @@ int main(void){
     while(1){
         
         adcr = ADC_RDATA(ADC0);
-        adcr = (adcr*20000)/4096;
-        adcr -= 10000;
+        adcr = (adcr*1000)/4096;
+        adcr+=1000;
+        
         
         prev_time = current_time;
         current_time = millis();
@@ -57,7 +58,7 @@ int main(void){
         //pitch += adcr;
         MoveServoA(roll-1500-adcr);
         MoveServoB(pitch-1500);
-        //SetMotorB(adcr);
+        SetMotorB(adcr);
     }
 }
 
