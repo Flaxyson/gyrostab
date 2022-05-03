@@ -17,6 +17,7 @@ typedef struct {
 	int limMaxInt;
 
 	/* Controller "memory" */
+	int proportional;
 	int integrator;
 	int prevError;			/* Required for integrator */
 	int differentiator;

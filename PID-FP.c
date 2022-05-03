@@ -1,38 +1,51 @@
-#include "PID.h"
+#include "PID-FP.h"
 
-void PIDController_Init(PIDController *pid) {
+void PIDControllerFP_Init(PIDController *pid) {
 
-	pid->Kp = 1.0f;
-    pid->Ki = 0.0f;
-	pid->Kd = 0.0f; //öka
+	/*
+	* Kp, Ki and Kd is * 256
+	*/
+
+	pid->Kp = 256;
+    pid->Ki = 0;
+	pid->Kd = 0; //öka
 	/* Clear controller variables */
-	pid->integrator = 0.0f;
-	pid->prevError  = 0.0f;
+	pid->proportional = 0;
+	
+	pid->integrator = 0;
+	pid->prevError  = 0;
 
 	pid->limMax = 230400;
 	pid->limMin = -230400;
 
-	pid->limMaxInt = 10000;
-	pid->limMinInt = -10000;
+	pid->limMaxInt = 2560000;
+	pid->limMinInt = -2560000;
 
-	pid->differentiator  = 0.0f;
-	pid->prevMeasurement = 0.0f;
+	pid->differentiator  = 0;
+	pid->prevMeasurement = 0;
 
-	pid->out = 0.0f;
+	pid->out = 0;
 
 }
-
-float PIDController_Update(PIDController *pid, float setpoint, float measurement, int deltaTime) { 
+/**
+ * @brief PID-controller
+ * 
+ * @param pid PID struct
+ * @param setpoint Setpoint fixedpoint << 8
+ * @param measurement measurement fixedpoint << 8
+ * @param deltaTime time since last loop in mS
+ * @return float 
+ */
+int PIDControllerFP_Update(PIDController *pid, int setpoint, int measurement, int deltaTime) { 
 	/*
 	* Error signal
 	*/
-    float error = setpoint - measurement; //setpoint = börvärde, measurement = ärvärde
+    int error = setpoint - measurement; //setpoint = börvärde, measurement = ärvärde
 
 	/*
 	* Proportional
 	*/
-    float proportional = pid->Kp * error;
-
+    pid->proportional = pid->Kp * error;
 	/*
 	* Integral
 	*/
@@ -54,10 +67,11 @@ float PIDController_Update(PIDController *pid, float setpoint, float measurement
 	*/
 		
     pid->differentiator = -(pid->Kd * ((measurement - pid->prevMeasurement)*1000/deltaTime));
+
 	/*
 	* Compute output and apply limits
 	*/
-    pid->out = proportional + pid->integrator + pid->differentiator;
+    pid->out = pid->proportional + pid->integrator + pid->differentiator;
 
     if (pid->out > pid->limMax) {
 
@@ -68,6 +82,7 @@ float PIDController_Update(PIDController *pid, float setpoint, float measurement
         pid->out = pid->limMin;
 
     }
+	pid->out = pid->out >> 8; /* 16/16 fixedpoint converted to 24/8 */
 
 	/* Store error and measurement for later use */
     pid->prevError       = error;
