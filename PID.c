@@ -9,6 +9,13 @@ void PIDController_Init(PIDController *pid) {
 	pid->integrator = 0.0f;
 	pid->prevError  = 0.0f;
 
+	pid->limMax = 230400;
+	pid->limMin = -230400;
+
+	pid->limMaxInt = 100;
+	pid->limMinInt = -100;
+	
+
 	pid->differentiator  = 0.0f;
 	pid->prevMeasurement = 0.0f;
 

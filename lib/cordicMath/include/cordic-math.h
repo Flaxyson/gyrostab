@@ -83,14 +83,14 @@ int32_t cordic_tan(int32_t degree);
  */
 int32_t ssqrt(int32_t n);
 
-int power(int x, int y);
+int32_t power(int32_t x, int32_t y);
 
-int absolute(int input);
+int32_t absolute(int32_t input);
 
-int isEven(int input);
+int32_t isEven(int32_t input);
 
-int isOdd(int input);
+int32_t isOdd(int32_t input);
 
-int to_degree(int input);
+int32_t to_degree(int32_t input);
 
-int to_radians(int input);
+int32_t to_radians(int32_t input);

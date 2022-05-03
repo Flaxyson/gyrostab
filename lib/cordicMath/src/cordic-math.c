@@ -188,7 +188,7 @@ int32_t ssqrt(int32_t n){
     return g>>2;
 }
 
-int power(int x, int y){
+int32_t power(int32_t x, int32_t y){
 
     if(y==0){
         return 256;
@@ -203,7 +203,7 @@ int power(int x, int y){
     } */
 }
 
-int absolute(int input){
+int32_t absolute(int32_t input){
     if(input>0){
         return input;
     }else{
@@ -211,21 +211,21 @@ int absolute(int input){
     }
 }
 
-int isEven(int input){
+int32_t isEven(int32_t input){
     if(input%2) return 0;
     return 1;
 }
 
-int isOdd(int input){
+int32_t isOdd(int32_t input){
     if(input%2) return 1;
     return 0;
 }
 
-int to_degree(int input){
+int32_t to_degree(int32_t input){
     return (input*14667>>8);
 }
 
-int to_radians(int input){
+int32_t to_radians(int32_t input){
     return (input/14667)<<8;
 }
 

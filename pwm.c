@@ -66,12 +66,12 @@ void SetMotorB(int value){
 void motorStartupSeq(int endThrottle){
     SetMotorA(2000);
     SetMotorB(2000);
-    delay_1ms(2000);
+    delay_1ms(3000);
     SetMotorA(1000);
     SetMotorB(1000);
-    delay_1ms(2000);
-    SetMotorA(endThrottle);
-    SetMotorB(endThrottle);
+    delay_1ms(3000);
+    SetMotorA(1000 + endThrottle);
+    SetMotorB(1000 + endThrottle);
 }
 
 
@@ -113,10 +113,10 @@ void initServoA(void){
 
 void MoveServoA(int degree){ 
     int move = ((10*degree)>>8)+1450;
-    if(move<550){
-        move=550;
-    }else if(move>2350){
-        move=2350;
+    if(move<600){
+        move=600;
+    }else if(move>1950){
+        move=1950;
     }
     timer_channel_output_pulse_value_config(TIMER0, TIMER_CH_0, move);
 }
