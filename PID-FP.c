@@ -3,23 +3,23 @@
 void PIDControllerFP_Init(PIDController *pid) {
 
 	/*
-	* Kp, Ki and Kd is * 256
+	* Kp, Ki and Kd is Kx * 256
 	*/
 
 	pid->Kp = 256;
     pid->Ki = 0;
-	pid->Kd = 0; //öka
+	pid->Kd = 0;
 	/* Clear controller variables */
 	pid->proportional = 0;
 	
 	pid->integrator = 0;
 	pid->prevError  = 0;
 
-	pid->limMax = 230400;
+	pid->limMax = 230400; //900 << 8
 	pid->limMin = -230400;
 
-	pid->limMaxInt = 2560000;
-	pid->limMinInt = -2560000;
+	pid->limMaxInt = 2949120; //45 << 16
+	pid->limMinInt = -2949120;
 
 	pid->differentiator  = 0;
 	pid->prevMeasurement = 0;
