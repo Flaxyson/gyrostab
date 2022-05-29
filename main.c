@@ -16,14 +16,15 @@ int main(void){
     int prev_time=0,current_time=0, delta_Time=0,adcr;
     int32_t gyroX,gyroY,accX,accY,roll=0,pitch=0;
     mpu_vector_t vecA, vecG;
-
+    motorStartupSeq(1000);
+    //SetMotorA(100);
+    //SetMotorB(1000);
     
     while(1){
         
         adcr = ADC_RDATA(ADC0);
         adcr = (adcr*1000)/4096;
         
-       
         
         prev_time = current_time;
         current_time = millis();
@@ -49,10 +50,12 @@ int main(void){
         pitch = ((0.99*(gyroY+pitch)) + (0.01*accY));  
         PIDController_Update(&pid, 0, pitch);
         //MoveServoB(adcr);
-        MoveServoA(pid.out-4500);
+        MoveServoA(-pid.out);
+        //MoveServoA(0);
         //MoveServoB(pitch-1500);
-        //SetMotorB(adcr);
+        //SetMotorB(100);
         //SetMotorA(adcr);
+        
     }
 }
 

@@ -6,9 +6,9 @@ void PIDControllerFP_Init(PIDController *pid) {
 	* Kp, Ki and Kd is Kx * 256
 	*/
 
-	pid->Kp = 256;
-    pid->Ki = 0;
-	pid->Kd = 0;
+	pid->Kp = 896;
+    pid->Ki = 10240;
+	pid->Kd = 25;
 	/* Clear controller variables */
 	pid->proportional = 0;
 	
