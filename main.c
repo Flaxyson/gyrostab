@@ -2,7 +2,7 @@
 #include "delay.h"
 #include "pwm.h"
 #include "gd32v_mpu6500_if.h"
-#include "PID.h"
+#include "PID-FP.h"
 #include "cordic-math.h"
 
 void init_ADC_B0();
@@ -11,14 +11,11 @@ void initCMG(void);
 
 int main(void){
     PIDController pid;
-    PIDController_Init(&pid);
+    PIDControllerFP_Init(&pid);
     initCMG();
     int prev_time=0,current_time=0, delta_Time=0,adcr;
     int32_t gyroX,gyroY,accX,accY,roll=0,pitch=0;
     mpu_vector_t vecA, vecG;
-    motorStartupSeq(1000);
-    //SetMotorA(100);
-    //SetMotorB(1000);
     
     while(1){
         
@@ -48,13 +45,10 @@ int main(void){
         //Complementary Filter
         roll = ((0.99*(gyroX+roll)) + (0.01*accX));
         pitch = ((0.99*(gyroY+pitch)) + (0.01*accY));  
-        PIDController_Update(&pid, 0, pitch);
-        //MoveServoB(adcr);
+        PIDControllerFP_Update(&pid, 0, pitch);
+ 
         MoveServoA(-pid.out);
-        //MoveServoA(0);
         //MoveServoB(pitch-1500);
-        //SetMotorB(100);
-        //SetMotorA(adcr);
         
     }
 }
@@ -117,5 +111,5 @@ void initCMG(void){
     
     mpu6500_install(I2C0);
     init_ADC_B0();
-    //motorStartupSeq(400);
+    motorStartupSeq(1000);
 }

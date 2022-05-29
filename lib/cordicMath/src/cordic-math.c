@@ -230,8 +230,3 @@ int32_t to_radians(int32_t input){
 }
 
 
-/*E^*/
-/*log*/
-/*rad to degree*/
-/*degree to rad*/
-
